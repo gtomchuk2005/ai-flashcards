@@ -3,6 +3,8 @@ import { auth } from '@/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useRouter, usePathname } from "next/navigation";
 import { useState, useEffect } from 'react';
+import Showcase from './components/Showcase';
+import { Box, Head } from '@mui/material';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -28,9 +30,11 @@ export default function Home() {
     if (loading) {
       return <div>Loading...</div>
     }
-
-  return (
-    <h1>hi</h1>
-  );
-
+  
+  return(
+    <Box>
+      <Showcase/>
+    </Box>
+  )
+  
 }
