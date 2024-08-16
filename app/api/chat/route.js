@@ -13,8 +13,7 @@ export async function POST(req) {
         responseMimeType: "text/plain",
       };
     
-    const userinput = await req.text();
-
+    const userinput = await req
 
     async function run() {
         conversationHistory.push({
@@ -36,8 +35,6 @@ export async function POST(req) {
         parts: [{text: aiResponse }]
     });
 
-    console.log(aiResponse)
-
     return aiResponse;
 
     }
@@ -46,7 +43,6 @@ export async function POST(req) {
     // making the message a list so we can parce what we need 
     const flashcards = message.split('\n\n')
 
-    console.log(flashcards)
     
 
     const flashcard_list = []
@@ -67,13 +63,13 @@ export async function POST(req) {
             Answer: answer
         });
     }
-    console.log(flashcard_list)
+
 
     const formattedJson = JSON.stringify(flashcard_list, null, 4);
 
-    console.log(formattedJson)
 
-    return NextResponse.json({ flashcard_list: formattedJson });
+
+    return flashcard_list
 
 }
 
