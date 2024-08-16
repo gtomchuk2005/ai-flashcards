@@ -1,5 +1,10 @@
+import Showcase from './components/Showcase'
+import { Box, Head } from '@mui/material'
+
 export default function Home() {
-  return (
-    <h1>hi</h1>
-  );
+  return(
+    <Box>
+      <Showcase/>
+    </Box>
+  )
 }
