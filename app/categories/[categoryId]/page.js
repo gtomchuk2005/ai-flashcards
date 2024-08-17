@@ -19,7 +19,7 @@
         }
 
         return(
-            <Box width="100%" height="100vh" display="flex" alignItems="center" flexDirection="column">
+            <Box width="100%" height="100vh" display="flex" alignItems="center" flexDirection="column" marginTop="100px">
                 <Typography sx={{ fontWeight: "bold", fontSize: "30px", textDecoration: "underline", color: "#982bff", }}>
                     {title}
                 </Typography>
