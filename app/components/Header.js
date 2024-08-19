@@ -30,7 +30,7 @@ export default function Header() {
                                 Login
                             </Typography>
                         </Button>
-                        <MenuIcon onClick={handleOpen} sx={{ color: "black", fontSize: "25px" }} />
+                        <MenuIcon onClick={handleOpen} sx={{ color: "black", fontSize: "25px", '&:hover': { cursor: 'pointer'}}} />
                     </Box>
 
                 </Box>
