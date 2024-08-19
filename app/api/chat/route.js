@@ -28,7 +28,7 @@ export async function POST(req) {
 
     const result = await chatSession.sendMessage(userinput);
 
-    const aiResponse = await result.response.text();
+    const aiResponse = result.response.text();
 
     conversationHistory.push({
         role: 'model',
