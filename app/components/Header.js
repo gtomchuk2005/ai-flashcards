@@ -27,7 +27,7 @@ export default function Header() {
                     <Box display="flex" alignItems="center" ml="auto" mr={5}>
                         <Button p={5} sx={{ backgroundColor: "#982bff", marginRight: "20px", borderRadius: "25px", paddingX: "20px", transition: "transform 0.2s ease-in-out", '&:hover': { backgroundColor: "#982bff", transform: "scale(1.1)"} }} >
                             <Typography color="white" fontWeight="bolder">
-                                Login
+                                <Link href='/login' color='white' underline='none'>Login</Link>
                             </Typography>
                         </Button>
                         <MenuIcon onClick={handleOpen} sx={{ color: "black", fontSize: "25px", '&:hover': { cursor: 'pointer'}}} />
