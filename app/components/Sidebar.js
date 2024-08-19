@@ -22,7 +22,7 @@ export default function Sidebar({ closeSidebar }) {
     }
 
     return(
-        <Box display="flex" justifyContent="space-between" flexDirection="column" alignItems="center">
+        <Box height={'100%'} display="flex" flexDirection="column" alignItems="center">
             <Typography p={3} sx={{ fontWeight: "bold", fontSize: "30px" }}>
                 FlashcardsAI
             </Typography>
@@ -60,7 +60,7 @@ export default function Sidebar({ closeSidebar }) {
             <Button onClick={() => {
                 signOut(auth);
                 closeSidebar();
-            }} sx={{ width: "60%", backgroundColor: "#982bff", fontWeight: "bold",fontSize: "20px", color: "white", borderRadius: "30px", transition: "transform 0.2s ease-in-out", '&:hover': { backgroundColor: "#982bff", transform: "scale(1.1)" }}}>
+            }} sx={{ width: "60%", position: 'absolute', bottom: 20, backgroundColor: "#982bff", fontWeight: "bold",fontSize: "20px", color: "white", borderRadius: "30px", transition: "transform 0.2s ease-in-out", '&:hover': { backgroundColor: "#982bff", transform: "scale(1.1)" }}}>
                 <Link underline='true' sx={{ color: "white" }}>Sign Out</Link>
             </Button>
         </Box>
