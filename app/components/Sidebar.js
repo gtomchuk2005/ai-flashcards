@@ -2,8 +2,10 @@
 import { Toys } from "@mui/icons-material"
 import { Box, Typography, Button, Link, Modal, TextField } from "@mui/material"
 import { useState, useEffect } from 'react'
+import { signOut } from "firebase/auth"
+import { auth } from "@/firebase"
 
-export default function Sidebar() {
+export default function Sidebar({ closeSidebar }) {
     const [categories, setCategories] = useState([])
     const [categoryName, setCategoryName] = useState('')
     const [openModal, setOpenModal] = useState(false)
@@ -55,7 +57,10 @@ export default function Sidebar() {
                 </Box>
             </Modal>
 
-            <Button sx={{ width: "60%", backgroundColor: "#982bff", fontWeight: "bold",fontSize: "20px", color: "white", borderRadius: "30px", transition: "transform 0.2s ease-in-out", '&:hover': { backgroundColor: "#982bff", transform: "scale(1.1)" }}}>
+            <Button onClick={() => {
+                signOut(auth);
+                closeSidebar();
+            }} sx={{ width: "60%", backgroundColor: "#982bff", fontWeight: "bold",fontSize: "20px", color: "white", borderRadius: "30px", transition: "transform 0.2s ease-in-out", '&:hover': { backgroundColor: "#982bff", transform: "scale(1.1)" }}}>
                 <Link underline='true' sx={{ color: "white" }}>Sign Out</Link>
             </Button>
         </Box>

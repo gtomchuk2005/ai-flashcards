@@ -38,7 +38,7 @@ export default function Header() {
             </AppBar>
 
             <Drawer anchor="right" open={isOpen} onClose={handleClose} PaperProps={{ sx: { border: "2px solid #982bff", borderRadius: "20px", margin: "10px"}}}>
-                <Sidebar />
+                <Sidebar closeSidebar={handleClose}/>
             </Drawer>
         </Box>
     )
