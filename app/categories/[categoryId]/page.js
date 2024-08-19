@@ -1,16 +1,41 @@
 'use client'
-import { Box, TextField, Typography, Button, Stack } from "@mui/material";
-import { useState, useEffect } from 'react';
-import Flashcard from '@/app/components/Flashcard';
-import { POST } from '@/app/api/chat/route';
+import { Box, TextField, Typography, Button, Stack } from "@mui/material"
+import { useState, useEffect } from 'react'
+import Flashcard from '@/app/components/Flashcard'
+import { POST } from '@/app/api/chat/route'
+import { useRouter, usePathname } from "next/navigation";
+import { auth } from '@/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export default function Category({ params }) {
-    const title = decodeURIComponent(params.categoryId);
-    const [prompt, setPrompt] = useState('');
-    const [flashcardAmount, setFlashcardAmount] = useState(0);
-    const [flashcards, setFlashcards] = useState([]);
-    const [generate, setGenerate] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const router = useRouter();
+    const pathname = usePathname();
+    const title = decodeURIComponent(params.categoryId)
+    const [prompt, setPrompt] = useState('')
+    const [flashcardAmount, setFlashcardAmount] = useState(0)
+    const [flashcards, setFlashcards] = useState([])
+    const [generate, setGenerate] = useState(false)
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            console.log('user signed out');
+
+            if (pathname !== '/signup') {
+                router.push('/login');
+            }
+            else {
+                router.push('/signup'); 
+            }
+        }
+        setLoading(false)
+        })
+    })
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
 
     const handleResponses = async () => {
         setGenerate(true);
@@ -41,18 +66,32 @@ export default function Category({ params }) {
                     <TextField placeholder="5" type="number" onChange={(e) => setFlashcardAmount(Number(e.target.value))} />
                 </Box>
 
-                <Box display="flex" alignItems="center" mb={2}>
+                <Box display="flex" alignItems="center" mb={2} >
                     <Typography mr={2} sx={{ fontWeight: "bold" }}>
                         Enter What You Want To Study
                     </Typography>
                     <TextField width="300px" placeholder="Enter Prompt" onChange={(e) => setPrompt(e.target.value)} />
                 </Box>
-            </Box>
+
 
             <Button onClick={handleResponses} variant="contained">
                 Generate
             </Button>
+            <Button onClick={handleResponses} variant="contained">
+                Generate
+            </Button>
 
+            {generate && flashcards.length > 0 ? (
+                <Box display="flex" justifyContent="center" width="1700px">
+                    <Stack>
+                        {flashcards.slice(0, flashcardAmount).map((flashcard, index) => (
+                            <Flashcard key={index} question={flashcard.Question} answer={flashcard.Answer} />
+                        ))}
+                    </Stack>
+                </Box>
+            ) : 
+                <div/>}
+        </Box>
             {generate && flashcards.length > 0 ? (
                 <Box display="flex" flexDirection="column" alignItems="center" mt={3}>
                     <Flashcard question={flashcards[currentIndex].Question} answer={flashcards[currentIndex].Answer} />
